@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OCCEjecutivo by OCCMundial.com</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="ejecutivo.css">
+  </head>
+  <body>
+    <div id="full_body" class="div_body">
+      <div id="header" class="div_header">Iniciar Sesi&oacute;n</div>
+      <div id="left_menu" class="div_left_menu">
+        <img src="logo_eje.png" alt="Logotipo">
+        <ul class="menu">
+          <li><a href="#">Menu muestra</a></li>
+          <li><a href="#">Menu muestra</a></li>
+          <li><a href="#">Menu muestra</a></li>
+          <li><a href="#">Menu muestra</a></li>
+        </ul>
+
+      </div>
+      <div id="seccion">
+        <p >Editar mi Perfil.</p>
+      </div>
+      <div id="right_content" class="div_right_content">
+        <div id="contact_data" class="div_contact_data">
+          <div id="foto"><img src="foto.png" alt="Perfil"></div>
+            <div id="datos_c">
+              <h2>Datos de la cuenta</h2>
+
+              <div id="datos_usuario"></div>
+              <script type="text/babel" src="scripts/user_contact.js"></script>
+          </div>
+        </div>
+
+        <div id="curriculum" class="div_curriculum">
+          <h2>Experiencia Profesional</h2>
+          <div id="experience" class="div_experience">
+            <p><span class="occ_label">Nombre de la compañ&iacute;a</span>&nbsp;<input class="occ_edit_box" id="experience_company_name" title="Nombre de la compañ&iacute;a" /></p>
+            <p><span class="occ_label">Puesto desempeñado</span>&nbsp;<input class="occ_edit_box" id="experience_position_title" title="Titulo o Puesto desempeñado" /></p>
+            <p><span class="occ_label">Periodo</span>&nbsp;<input class="occ_edit_box" id="experience_from" title="Desde" />&nbsp;a&nbsp;<input class="occ_edit_box" id="experience_to" title="Hasta" /></p>
+            <p><span class="occ_label">Ubicaci&oacute;n</span>&nbsp;<input class="occ_edit_box" id="experience_location" title="Localidad / Ubicaci&oacute;n" /></p>
+            <p><span class="occ_label">¿Es su trabajo actual?</span>&nbsp;<input class="occ_edit_box" id="experience_actual" title="Si o no es su experiencia actual" /></p>
+            <p><span class="occ_label">Descripci&oacute;n</span>&nbsp;<input class="occ_edit_box" id="experience_description" title="Funciones desempeñadas" /></p>
+          </div>
+          <div id="academic" class="div_academic">
+            <h2>Nivel de Estudios</h2>
+            <p><span class="occ_label">Instituci&oacute;n Acad&eacute;mica</span>&nbsp;<input class="occ_edit_box" id="academic_institution" title="Nombre de la institución" /></p>
+            <p><span class="occ_label">Fecha de estudio</span>&nbsp;<input class="occ_edit_box" id="academic_from" title="Desde" />&nbsp;a&nbsp;<input class="occ_edit_box" id="academic_to" title="Hasta" /></p>
+            <p><span class="occ_label">Grado</span>&nbsp;<input class="occ_edit_box" id="academic_grade" title="Nivel del estudio o Grado" /></p>
+            <p><span class="occ_label">Descripci&oacute;n</span>&nbsp;<input class="occ_edit_box" id="academic_description" title="Principales conocimientos adquiridos" /></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

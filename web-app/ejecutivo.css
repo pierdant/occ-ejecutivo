@@ -1,0 +1,281 @@
+@font-face {
+  font-family: 'Museo';
+  src: url('font/Museo-300.eot'); /* IE9 Compat Modes */
+  src: url('font/Museo-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('font/Museo-300.woff2') format('woff2'), /* Super Modern Browsers */
+       url('font/Museo-300.woff') format('woff'), /* Pretty Modern Browsers */
+       url('font/Museo-300.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('font/Museo-300.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Museo500';
+  src: url('font/Museo-500.eot'); /* IE9 Compat Modes */
+  src: url('font/Museo-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('font/Museo-500.woff2') format('woff2'), /* Super Modern Browsers */
+       url('font/Museo-500.woff') format('woff'), /* Pretty Modern Browsers */
+       url('font/Museo-500.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('font/Museo-500.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Museo700';
+  src: url('font/Museo-700.eot'); /* IE9 Compat Modes */
+  src: url('font/Museo-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('font/Museo-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('font/Museo-700.woff') format('woff'), /* Pretty Modern Browsers */
+       url('font/Museo-700.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('font/Museo-700.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+body {
+    background-image: url("fondo.png");
+    background-size: 2px;
+}
+
+div#seccion {
+    width: 78%;
+    float: right;
+    margin-top: 10px;
+    /* background: #2d2d2d; */
+    color: #2d2d2d;
+    border-bottom: 1px solid #d8b46b;
+    padding: 3px 0px 16px 0px;
+}
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: Museo, Helvetica, SANS-SERIF;
+}
+div#header {
+    float: right;
+    position: fixed;
+    right: 0px;
+    background: #2d2d2d;
+    color: #D8B26A;
+    height: 30px;
+    width: 120px;
+    text-align: center;
+    padding-top: 8px;
+    border-radius: 0px 0px 0px 10px;
+    font-size: 13px;
+    padding-top: 11px;
+}
+
+
+
+div#left_menu {
+	position: fixed;
+	width: 24%;
+	height: 100%;
+	background-color: #2d2d2d;
+	text-align: center;
+	max-width: 270px;
+	overflow: hidden;
+}
+
+div#right_content {
+    width: 74%;
+    float: right;
+    margin-bottom: 20px;
+}
+
+div#left_menu img {
+    width: 62%;
+    margin-top: 20%;
+    align-items: initial;
+}
+
+ul.menu {margin-top: 30%;}
+
+ul.menu li a {
+    color: #d8b36a;
+    font-size: 14px;
+    font-weight: 100;
+    border-top: 1px solid #212121;
+    display: block;
+    text-align: left;
+    padding: 15px 0px 15px 16%;
+    text-decoration: none;
+}
+
+ul.menu li a:hover {
+    background: #272727;
+    background-image: url('pleca.png');
+    background-repeat: no-repeat;
+    background-size: 3px 100%;
+}
+
+
+ul.menu li:last-child{
+	border-bottom:1px solid #212121;
+}
+
+div#foto {
+    float: left;
+    margin-right: 16px;
+    width: 22%;
+}
+
+div#foto {}
+
+div#foto {}
+
+div#foto img {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+div#contact_data {margin-top: 21px;margin-bottom: 20px;display: block;overflow: hidden;}
+
+div#contact_data {}
+
+div#curriculum {
+    clear: both;
+}
+
+
+
+#contact_data span.occ_label {
+    font-weight: 900;
+    font-size: 15px;
+}
+
+input {
+    min-height: 25px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    margin: 2px;
+    font-size: 13px;
+    color: #2d2d2d;
+    padding: 0px 6px;
+    box-shadow: #ccc 4px 3px 4px -4px;
+}
+
+
+
+div#datos_c {
+    float: left;
+    width: 71%;
+    display: block;
+    padding-bottom: 10px;
+}
+
+div#datos_c input {
+    width: 80%;
+    display: block;
+}
+
+
+
+
+
+
+
+
+@media (min-width: 1250px) {
+ div#right_content{
+	width:78%
+ }
+}
+
+
+
+
+
+/*********	Experiencia Prof	***********/
+
+
+div#experience p span, div#experience p input {
+}
+
+div#experience p {
+    display: inline-block;
+}
+
+div#experience p {width: 42%;}
+
+div#experience p input {
+    width: 89%;
+}
+
+div#experience p span {
+}
+
+div#curriculum h2 {
+    background: #d8b46b;
+    margin: 10px 10px 10px -7px;
+    padding: 8px 8px;
+    font-size: 18px;
+}
+
+
+
+
+span.occ_label [content="Periodo"] {
+    background: #ff0000;
+}
+
+input#experience_from {
+    display: inline-block !important;
+}
+
+input#experience_to {
+    display: inline-block !important;
+}
+
+span[content="periodo"] {
+    background: #ff0000;
+    width: 10px;
+    height: 10px;
+}
+
+div#experience p:nth-child(3) {
+    width: 82%;
+}
+
+div#experience p:nth-child(3) input {
+    width: 45%;
+    margin-left: 1px;
+}
+
+div#experience p:nth-child(3) span {
+    display: block;
+}
+
+
+/*********	Nivel de estudios	**************/
+
+
+input#experience_to {
+    margin-left: 7px !important;
+}
+
+div#academic p {
+    display: inline-block;
+    width: 41%;
+}
+
+div#academic p span {
+    display: block;
+}
+
+div#academic p input {
+    width: 81%;
+}
+
+div#academic p:nth-child(3) {
+    display: block;
+    width: 90%;
+}
+
+div#academic p:nth-child(3) input {
+    display: inline-block !important;
+    width: 37%;
+}
+
+div#seccion p {
+    padding-left: 3%;
+}
+
+div#experience {margin-bottom: 19px;}
