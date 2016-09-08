@@ -7,7 +7,7 @@ namespace OCCEjecutivoAPI.Models
 {
     public class Candidate
     {
-        public string Id { get; set; }
+        public string id { get; set; }
         public string FirstName { get; set; }
         public string LastName_1 { get; set; }
         public string LastName_2 { get; set; }
