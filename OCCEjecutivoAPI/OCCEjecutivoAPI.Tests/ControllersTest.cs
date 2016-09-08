@@ -12,32 +12,17 @@ namespace OCCEjecutivoAPI.Tests
     [TestClass]
     public class ControllersTest
     {
-        [TestMethod]
-        public void GetCandidate_ShouldBeThere_OrNot()
-        {
-            var controller = new CandidatesController();
-            controller.Request = new HttpRequestMessage();
-            controller.Configuration = new HttpConfiguration();
+        string _inserted_id;
 
-            var result = controller.GetCandidateData("1");
-
-            Assert.IsNotNull(result);
-            Candidate c;
-            Assert.IsTrue(result.TryGetContentValue<Candidate>(out c));
-            Assert.AreEqual("Juan", c.FirstName);
-
-            //Sería así?? 
-            result = controller.GetCandidateData("3");
-            Assert.IsNotNull(result);
-            Assert.AreEqual(HttpStatusCode.NotFound, result.StatusCode);
-        }
-
+        /// <summary>
+        /// Full CRUD tests... First we need to test Insert / Update, then we check exists and then we delete it
+        /// </summary>
         [TestMethod]
         public void SaveCandidate_EnsureWorks_And_DataPersists()
         {
+
             Candidate candidate = new Candidate
             {
-                id = "5",
                 FirstName = "Eduardo",
                 LastName_1 = "Perez",
                 Email = "eduardo@perez.com",
@@ -48,16 +33,54 @@ namespace OCCEjecutivoAPI.Tests
             controller.Request = new HttpRequestMessage();
             controller.Configuration = new HttpConfiguration();
 
+            //insert
             var result = controller.SaveCandidateData(candidate);
             Assert.AreEqual(HttpStatusCode.Created, result.StatusCode);
-
-            result = controller.GetCandidateData("5");
-            Assert.IsNotNull(result);
             Candidate c;
             Assert.IsTrue(result.TryGetContentValue<Candidate>(out c));
+            Assert.IsNotNull(c.id);
             Assert.AreEqual("Eduardo", c.FirstName);
+            _inserted_id = c.id;
+
+            //update
+            candidate.id = _inserted_id;
+            candidate.LastName_2 = "updated lastname_2";
+            result = controller.SaveCandidateData(candidate, candidate.id);
+            Assert.AreEqual(HttpStatusCode.OK, result.StatusCode);
+            c = null;
+            Assert.IsTrue(result.TryGetContentValue<Candidate>(out c));
+            Assert.IsNotNull(c.id);
+            Assert.AreEqual(candidate.LastName_2, c.LastName_2);
+
+            result = controller.GetCandidateData(_inserted_id);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(HttpStatusCode.OK, result.StatusCode);
+            c = null;
+            Assert.IsTrue(result.TryGetContentValue<Candidate>(out c));
+            Assert.AreEqual("Eduardo", c.FirstName);
+
+            //luego buscar algo que no existe
+            result = controller.GetCandidateData("3");
+            Assert.IsNotNull(result);
+            Assert.AreEqual(HttpStatusCode.NotFound, result.StatusCode);
+
+            //y por ultimo el borrado de lo creado
+            result = controller.DeleteCandidate(_inserted_id);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(HttpStatusCode.OK, result.StatusCode);
+
+            //y  borrado de lo que no existe
+            result = controller.DeleteCandidate("3");
+            Assert.IsNotNull(result);
+            Assert.AreEqual(HttpStatusCode.NotFound, result.StatusCode);
+
+
         }
 
+        /// <summary>
+        /// Ensure that what shouldn't work, really doesn't work (should that be a test?)
+        /// </summary>
         [TestMethod]
         public void SaveCandidate_ValidateParams()
         {

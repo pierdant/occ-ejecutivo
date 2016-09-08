@@ -5,46 +5,30 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using OCCEjecutivoAPI.Models;
+using MongoDB.Driver;
 
-using System.Diagnostics;
 
 namespace OCCEjecutivoAPI.Controllers
 {
     public class CandidatesController : ApiController
     {
 
-        List<Candidate> allThePeople = new List<Candidate>();
-
-        public CandidatesController()
-        {
-            allThePeople.Add(new Candidate {
-                id = "1",
-                FirstName = "Juan",
-                LastName_1 = "Perez",
-                Email = "juan@perez.com",
-                PhoneNumber = "(442) 123-4567"
-            });
-
-            allThePeople.Add(new Candidate
-            {
-                id = "2",
-                FirstName = "Gonzalo",
-                LastName_1 = "Perez",
-                Email = "gonzalo@perez.com",
-                PhoneNumber = "(442) 123-4567"
-            });
-        }
-
         //Get /api/Candidates/#
         public HttpResponseMessage GetCandidateData(string id)
         {
             try
             {
-                var aPerson = allThePeople.FirstOrDefault((p) => p.id == id);
-                if (aPerson == null)
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                DataContext cn = new DataContext();
+                var filter = Builders<Candidate>.Filter.Eq("id", id);
+                var list = cn.Candidates_Data
+                    .Find(filter)
+                    .Limit(1)
+                    .ToListAsync()
+                    .GetAwaiter().GetResult();
+                if( list.Count > 0)
+                    return Request.CreateResponse(list[0]);
                 else
-                    return Request.CreateResponse(aPerson);
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
 
             }
             catch (Exception)
@@ -59,6 +43,7 @@ namespace OCCEjecutivoAPI.Controllers
             bool existingObject = false;
 
             #region FieldParamValidation
+
             if (id.CompareTo("0") != 0 )
             {
                 existingObject = true;
@@ -78,18 +63,26 @@ namespace OCCEjecutivoAPI.Controllers
 
             try
             {
-                // do general connect to DB
+                DataContext cn = new DataContext();
+
 
                 if( existingObject )
                 {
-                    // do an update operation
-                    allThePeople.Add(candidate); // todo: digamos que lo mandamos a la BD, solo hay que asegurar que si se va!
-                    return Request.CreateResponse<Candidate>(HttpStatusCode.OK, candidate);
+                    // there's two ways: a) take the whole incomming object and simply replace it, or,
+                    // b) look for the object at the db, check which incomming fields are not null and have changed, replace them and then update the object at the DB
+                    // for simplicity, I'm going ahead with option A)!!! :)
+
+                    var filter = Builders<Candidate>.Filter.Eq("id", candidate.id);
+                    var result = cn.Candidates_Data.ReplaceOneAsync(filter, candidate).GetAwaiter().GetResult();
+                    if (result.IsAcknowledged && (result.ModifiedCount > 0))
+                        return Request.CreateResponse<Candidate>(HttpStatusCode.OK, candidate);
+                    else
+                        return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
                 else
                 {
-                    // create a new object
-                    allThePeople.Add(candidate); // todo: digamos que lo mandamos a la BD, solo hay que asegurar que si se va!
+                    candidate.id = Guid.NewGuid().ToString().Replace("-", "");
+                    cn.Candidates_Data.InsertOneAsync(candidate).GetAwaiter().GetResult();
                     return Request.CreateResponse<Candidate>(HttpStatusCode.Created, candidate);
                 }
             }
@@ -99,6 +92,24 @@ namespace OCCEjecutivoAPI.Controllers
             }
         }
 
+        public HttpResponseMessage DeleteCandidate(string id)
+        {
+            try
+            {
+                DataContext cn = new DataContext();
+                var filter = Builders<Candidate>.Filter.Eq("id", id);
+                var result = cn.Candidates_Data.DeleteOneAsync(filter).GetAwaiter().GetResult();
+                if (result.IsAcknowledged && (result.DeletedCount > 0))
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                else
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+
+        }
 
     }
 }
