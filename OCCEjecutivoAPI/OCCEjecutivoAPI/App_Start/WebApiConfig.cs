@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 
 namespace OCCEjecutivoAPI
@@ -19,6 +20,10 @@ namespace OCCEjecutivoAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Set JSON as first option return type
+            config.Formatters.Clear();
+            config.Formatters.Add(new JsonMediaTypeFormatter());
         }
     }
 }

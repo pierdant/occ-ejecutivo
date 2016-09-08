@@ -7,7 +7,7 @@ namespace OCCEjecutivoAPI.Models
 {
     public class Experience
     {
-        public string Id { get; set; }
+        public string id { get; set; }
         public string JobName { get; set; }
         public string CompanyName { get; set; }
         public string JobDescription { get; set; }
