@@ -37,7 +37,6 @@ namespace OCCEjecutivoAPI.Tests
         {
             Candidate candidate = new Candidate
             {
-                id = "5",
                 FirstName = "Eduardo",
                 LastName_1 = "Perez",
                 Email = "eduardo@perez.com",
@@ -50,11 +49,9 @@ namespace OCCEjecutivoAPI.Tests
 
             var result = controller.SaveCandidateData(candidate);
             Assert.AreEqual(HttpStatusCode.Created, result.StatusCode);
-
-            result = controller.GetCandidateData("5");
-            Assert.IsNotNull(result);
             Candidate c;
             Assert.IsTrue(result.TryGetContentValue<Candidate>(out c));
+            Assert.IsNotNull(c.id);
             Assert.AreEqual("Eduardo", c.FirstName);
         }
 

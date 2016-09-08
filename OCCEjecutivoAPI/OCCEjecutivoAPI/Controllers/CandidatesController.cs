@@ -59,6 +59,7 @@ namespace OCCEjecutivoAPI.Controllers
             bool existingObject = false;
 
             #region FieldParamValidation
+
             if (id.CompareTo("0") != 0 )
             {
                 existingObject = true;
@@ -78,7 +79,8 @@ namespace OCCEjecutivoAPI.Controllers
 
             try
             {
-                // do general connect to DB
+                DataContext cn = new DataContext();
+
 
                 if( existingObject )
                 {
@@ -88,8 +90,9 @@ namespace OCCEjecutivoAPI.Controllers
                 }
                 else
                 {
-                    // create a new object
-                    allThePeople.Add(candidate); // todo: digamos que lo mandamos a la BD, solo hay que asegurar que si se va!
+                    candidate.id = Guid.NewGuid().ToString().Replace("-", "");
+                    cn.Candidates_Data.InsertOneAsync(candidate).GetAwaiter().GetResult();
+                    //allThePeople.Add(candidate); // todo: digamos que lo mandamos a la BD, solo hay que asegurar que si se va!
                     return Request.CreateResponse<Candidate>(HttpStatusCode.Created, candidate);
                 }
             }
