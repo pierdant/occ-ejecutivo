@@ -44,11 +44,18 @@ var GetContactData = React.createClass({
       return <div>no-name</div>
     }
 
-    var userFields = this.state.userData.account.map(function(exp) {
-      return (
-        <PaintUserData key={exp.id} name={exp.name} lastname1={exp.lastname} lastname2={exp.lastname} email={exp.email} title={exp.office_phone} />
-      );
-    });
+
+    /// Si llega un solo dato, en el Json, y no un "arreglo" de datos... entonces, usamos esto...
+    var candidateData = this.state.userData.account;
+    var userFields = <PaintUserData key={candidateData.id} name={candidateData.name} lastname1={candidateData.lastname} lastname2={candidateData.lastname} email={candidateData.email} title={candidateData.office_phone} />
+
+    /// Pero si resulta que vamos a recibir más de uno, entonces tenemos que iterar, y para eso usamos la funcion de mapeo dentro de javascript ... map!
+    //var userFields = this.state.userData.account.map(function(exp) {
+    //  return (
+    //    <PaintUserData key={exp.id} name={exp.name} lastname1={exp.lastname} lastname2={exp.lastname} email={exp.email} title={exp.office_phone} />
+    //  );
+    //});
+
     return (
       <div>
         {userFields}
